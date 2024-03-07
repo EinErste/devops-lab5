@@ -15,11 +15,13 @@ provider "aws" {
 }
 
 resource "aws_instance" "app_server" {
+  count = 2
+
   ami                    = data.aws_ami.ubuntu.id
   instance_type          = "t2.micro"
   key_name               = "SerhiiSLab5"
   vpc_security_group_ids = ["sg-01142ec3c87ec19dd"]
   tags = {
-    Name = "SerhiiSLab5Terraform"
+    Name = "SerhiiSLab5Terraform-${count.index}"
   }
 }
